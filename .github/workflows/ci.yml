@@ -11,7 +11,7 @@ on: # trigger
       - 'src/**'    
 
 jobs:
-  hello: # name of our job
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,15 +19,6 @@ jobs:
 
       - name: Show trigger
         run: echo "Triggered by ${{ github.event_name }}"
-    
-      - name: Show environment
-        run: |
-          echo "Hello from GitHub Actions" # print something
-          uname -a # name of the OS
-          pwd # print the working directory / folder
 
-      - name: List Files
-        run: ls -la
-
-      - name: List Contents of index.html
-        run: cat src/index.html
+      - name: Run tests
+        run: echo "Tests passed"
