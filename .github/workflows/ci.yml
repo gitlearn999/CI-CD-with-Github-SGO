@@ -46,12 +46,18 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
+    env:
+      REGION: ${{ vars.DEPLOY_REGION }}    
+
     steps:
       - name: Download build output
         uses: actions/download-artifact@v7
         with:
           name: web-dist
           path: ./dist
+
+      - name: Show deployment configuration
+        run: echo "Deploying to $REGION"          
 
       - name: Inspect build output
         run: |
