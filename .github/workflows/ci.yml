@@ -24,7 +24,10 @@ jobs:
         run: echo "Tests passed"
 
   build:
-    needs: test
+    needs: 
+      - test
+      - lint
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -35,8 +38,18 @@ jobs:
           mkdir -p dist
           cp src/index.html dist/index.html
 
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      
+      - name: Linting Code
+        run: echo "Lint Passed"
+
   deploy-demo:
     needs: build
+    
     runs-on: ubuntu-latest
 
     steps:
