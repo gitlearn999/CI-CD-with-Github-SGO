@@ -21,6 +21,10 @@ on: # trigger
 permissions:
   contents: read      
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true  
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -62,13 +66,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     
-    permissions:
-      contents: read
-
     env:
       REGION: ${{ vars.DEPLOY_REGION }}    
 
     steps:
+      - name: Show selected environment
+        run: echo "Selected environment is ${{ inputs.environment }}"
+
+      - name: Simulate deployment
+        run: sleep 60        
+    
       - name: Verify deployment token
         env:
           TOKEN: ${{ secrets.DEMO_TOKEN }}
