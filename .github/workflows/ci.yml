@@ -50,6 +50,13 @@ jobs:
       REGION: ${{ vars.DEPLOY_REGION }}    
 
     steps:
+      - name: Verify deployment token
+        env:
+          TOKEN: ${{ secrets.DEMO_TOKEN }}
+        run: |
+          echo "A deployment token was provided"
+          test -n "$TOKEN"
+    
       - name: Download build output
         uses: actions/download-artifact@v7
         with:
