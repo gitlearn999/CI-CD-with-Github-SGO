@@ -72,10 +72,7 @@ jobs:
     steps:
       - name: Show selected environment
         run: echo "Selected environment is ${{ inputs.environment }}"
-
-      - name: Simulate deployment
-        run: sleep 60        
-    
+   
       - name: Verify deployment token
         env:
           TOKEN: ${{ secrets.DEMO_TOKEN }}
