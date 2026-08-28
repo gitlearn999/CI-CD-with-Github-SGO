@@ -28,6 +28,11 @@ jobs:
 
   build:
     needs: test
+
+    permissions:
+      contents: read
+      packages: write    
+
     runs-on: ubuntu-latest
 
     steps:
@@ -48,6 +53,9 @@ jobs:
   deploy-demo:
     needs: build
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
 
     env:
       REGION: ${{ vars.DEPLOY_REGION }}    
